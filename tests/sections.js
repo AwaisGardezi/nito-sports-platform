@@ -3,7 +3,7 @@ const path = require('path');
 const puppeteer = require('puppeteer-core');
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const BASE = 'http://127.0.0.1:8099';
-const OUT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform/tests/shots';
+const OUT = require('path').resolve(__dirname, 'shots');
 
 (async () => {
   const b = await puppeteer.launch({

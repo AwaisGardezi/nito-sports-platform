@@ -29,7 +29,7 @@ const os = require('os');
 const path = require('path');
 const puppeteer = require('puppeteer-core');
 
-const ROOT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform';
+const ROOT = require('path').resolve(__dirname, '..');
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const URL = 'http://127.0.0.1:8099';
 const EMAIL = 'owner@nitosports.com';

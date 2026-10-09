@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer-core');
 
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const BASE = 'http://127.0.0.1:8099';
-const OUT = path.join('C:/Users/PcR/OneDrive/Desktop/Sports Platform', 'tests', 'shots', 'admin');
+const OUT = path.join(__dirname, 'shots', 'admin');
 
 (async () => {
   if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });

@@ -1,6 +1,6 @@
 const fs=require('fs'),os=require('os'),path=require('path'),puppeteer=require('puppeteer-core');
 const CHROME='C:/Program Files/Google/Chrome/Application/chrome.exe';
-const OUT='C:/Users/PcR/OneDrive/Desktop/Sports Platform/tests/shots';
+const OUT=require('path').resolve(__dirname, 'shots');
 const JOBS=[
   ['login.html','#authForm',700],
   ['index.html','.footer',900],

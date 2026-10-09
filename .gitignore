@@ -17,6 +17,11 @@ data/
 # Written by run-tests.sh when a suite fails, and by the screenshot helpers.
 tests/test-logs/
 
+# --- working notes ----------------------------------------------------------
+# Private development notes kept alongside the suites. Machine-specific, not
+# part of the platform.
+tests/memory/
+
 # --- local tool metadata ----------------------------------------------------
 # Written by the desktop helper that launches the project. Machine-specific,
 # carries nothing the repository needs.

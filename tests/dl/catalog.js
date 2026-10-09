@@ -1,6 +1,6 @@
 /* ==========================================================================
    NITO SPORTS — Product Catalog
-   Exported from the console on 2026-10-09 14:30
+   Exported from the console on 2026-10-09 16:09
    Upload this file over assets/js/catalog.js on your live site.
    55 published product lines
    ========================================================================== */

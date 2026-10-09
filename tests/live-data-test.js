@@ -17,7 +17,7 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM, VirtualConsole } = require('jsdom');
 
-const ROOT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform';
+const ROOT = require('path').resolve(__dirname, '..');
 const LS_KEY = 'nito_platform_v1';
 
 let results = [];

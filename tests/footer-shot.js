@@ -1,6 +1,6 @@
 const fs=require('fs'),os=require('os'),path=require('path'),puppeteer=require('puppeteer-core');
 const CHROME='C:/Program Files/Google/Chrome/Application/chrome.exe';
-const OUT='C:/Users/PcR/OneDrive/Desktop/Sports Platform/tests/shots';
+const OUT=require('path').resolve(__dirname, 'shots');
 (async()=>{
   fs.mkdirSync(OUT,{recursive:true});
   const udd=fs.mkdtempSync(path.join(os.tmpdir(),'fshot-'));

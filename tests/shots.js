@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer-core');
 
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const BASE = 'http://127.0.0.1:8099';
-const OUT = path.join('C:/Users/PcR/OneDrive/Desktop/Sports Platform', 'tests', 'shots');
+const OUT = path.join(__dirname, 'shots');
 
 const SHOTS = [
   ['/', 'home-top', { w: 1440, h: 950, full: false }],

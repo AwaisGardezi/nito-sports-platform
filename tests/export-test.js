@@ -14,7 +14,7 @@ const path = require('path');
 const puppeteer = require('puppeteer-core');
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const BASE = 'http://127.0.0.1:8099';
-const DL = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform/tests/dl';
+const DL = require('path').resolve(__dirname, 'dl');
 
 let fail = 0;
 const ok = (l, c, x) => { console.log((c ? '  PASS  ' : '  FAIL  ') + l + (x ? '   [' + x + ']' : '')); if (!c) fail++; };

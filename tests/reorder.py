@@ -1,6 +1,6 @@
 import re, io, os
 
-root = r'C:/Users/PcR/OneDrive/Desktop/Sports Platform'
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 p = os.path.join(root, 'index.html')
 src = io.open(p, encoding='utf-8').read()
 

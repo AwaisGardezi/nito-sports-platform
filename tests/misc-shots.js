@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer-core');
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
-const OUT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform/tests/shots';
+const OUT = require('path').resolve(__dirname, 'shots');
 
 (async () => {
   const b = await puppeteer.launch({

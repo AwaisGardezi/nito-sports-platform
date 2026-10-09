@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM, VirtualConsole } = require('jsdom');
 
-const ROOT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform';
+const ROOT = require('path').resolve(__dirname, '..');
 /* Mirrors the <script> order in the public HTML files. Keep it in step: a
    module the real page loads and this list omits is one this suite silently
    never exercises (that is how a broken `global` reference in site.js once

@@ -1,6 +1,6 @@
 const fs=require('fs'),os=require('os'),path=require('path'),puppeteer=require('puppeteer-core');
 const CHROME='C:/Program Files/Google/Chrome/Application/chrome.exe';
-const OUT='C:/Users/PcR/OneDrive/Desktop/Sports Platform/tests/shots';
+const OUT=require('path').resolve(__dirname, 'shots');
 const page=process.argv[2]||'index.html';
 const sel=process.argv[3]||'#site-header';
 const pad=parseInt(process.argv[4]||'0',10);

@@ -9,7 +9,7 @@ const { spawn } = require('child_process');
 const puppeteer = require('puppeteer-core');
 
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
-const ROOT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform';
+const ROOT = require('path').resolve(__dirname, '..');
 const PORT = 8853;
 const BASE = 'http://127.0.0.1:' + PORT;
 const DB = path.join(os.tmpdir(), 'nito-shot-' + Date.now() + '.json');

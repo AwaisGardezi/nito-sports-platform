@@ -7,7 +7,7 @@ const path = require('path');
 const puppeteer = require('puppeteer-core');
 
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
-const ROOT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform';
+const ROOT = require('path').resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'tests/shots');
 
 const FILES = [

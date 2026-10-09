@@ -21,7 +21,7 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM, VirtualConsole } = require('jsdom');
 
-const ROOT = 'C:/Users/PcR/OneDrive/Desktop/Sports Platform';
+const ROOT = require('path').resolve(__dirname, '..');
 
 /* These two lists mirror the <script> tags in admin.html and login.html. Keep
    them in step with those files: a module that the real page loads but the

@@ -13,10 +13,10 @@
 # ---------------------------------------------------------------------------
 set -u
 
-ROOT="C:/Users/PcR/OneDrive/Desktop/Sports Platform"
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PORT=8099
-NODE_DEFAULT="C:/Users/PcR/.local-node/binaries/node/versions/22.22.2-6/node.exe"
-PY="C:/Users/PcR/.local-node/binaries/python/versions/3.13.12/python.exe"
+NODE_DEFAULT="${NITO_NODE:-}"
+PY="${NITO_PYTHON:-}"
 
 if [ -x "$NODE_DEFAULT" ]; then NODE="$NODE_DEFAULT"; else NODE="node"; fi
 
