@@ -1,0 +1,35 @@
+@media screen and (max-width: 1200px) {
+
+}
+@media screen and (max-width: 1024px) {
+    .minicart-wrapper .action.showcart .counter.qty i { width: 30px; line-height: 30px;}
+
+}
+@media screen and (max-width: 768px) {
+    .hidden-block { display: none !important}
+    .navigation-desktop { display: none;}
+    .navigation-mobile-container { display: block;}
+    .logo { position: relative; top: 0; text-align: center;}
+    .logo img { margin: 0 auto}
+    .minicart-wrapper .action.showcart .counter.qty { margin: 10px 0 0;}
+}
+@media screen and (max-width: 615px) {
+	
+}
+@media screen and (max-width: 480px) {
+    .hidden-block { display: none !important}
+    .minicart-wrapper .action.showcart .counter.qty { margin: 0;}
+    .p-pull-right { float: none;}
+    table.ShopCart td, table.ShopCart th { border-right: 0 none;display: block !important;float: none !important;text-align: left !important;width: auto !important;}
+    table.ShopCart tr td:before {content: attr(data-label);float: left;font-weight: bold;text-align: left;white-space: nowrap;width: 50%;}
+    table.ShopCart tr td {text-align: right;display: block;min-height: 20px;border-left: none;background: none;}
+    table.ShopCart thead { display: none; }	
+    .CartInfo tbody .btn-success { float:right;}
+    .CartInfo tbody .productd div { float:left;}
+	
+}
+@media screen and (max-width: 320px) {
+
+    .owl-carousel .owl-wrapper-outer { margin-top:50px;}
+
+}

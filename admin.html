@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Console — NITO SPORTS</title>
+<meta name="description" content="Staff console for NITO SPORTS. Manage the product catalogue, enquiries, customers and team.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070d15">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/app.css?v=20261009">
+</head>
+<body>
+
+<h1 class="sr-only">NITO SPORTS staff console</h1>
+
+<!-- ===================== BOOT / AUTH GUARD ===================== -->
+<div id="boot" style="min-height:100vh;display:grid;place-items:center;padding:24px">
+  <div class="empty">
+    <span style="display:block;width:26px;height:26px;border:2px solid var(--line-3);border-top-color:var(--blue);border-radius:999px;animation:spin .8s linear infinite"></span>
+    <b>Checking your session…</b>
+    <span>One moment.</span>
+  </div>
+</div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+
+<!-- ===================== CONSOLE ===================== -->
+<div class="app" id="shell" hidden>
+
+  <div class="side__scrim" id="sideScrim"></div>
+
+  <aside class="side" id="side">
+    <div class="side__top">
+      <img class="side__logo" src="assets/img/nito-lockup-light.png" width="432" height="102" alt="NITO SPORTS">
+      <span class="side__tag">Console</span>
+    </div>
+    <nav class="side__nav" id="sideNav" aria-label="Console sections"></nav>
+    <div class="side__foot" id="sideFoot"></div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <button class="top__burger" id="topBurger" aria-label="Open navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div>
+        <div class="top__title" id="topTitle">Dashboard</div>
+        <div class="top__sub" id="topSub"></div>
+      </div>
+      <div class="top__right">
+        <a class="btn btn--ghost btn--sm" href="index.html" id="topSite" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/></svg>
+          <span>View site</span>
+        </a>
+        <button class="btn btn--ghost btn--sm" id="topLogout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          <span>Sign out</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="page" id="view"></main>
+  </div>
+</div>
+
+<!-- ===================== DRAWER ===================== -->
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <span class="drawer__title" id="drawerTitle"></span>
+      <button class="drawer__x" id="drawerX" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="drawer__body" id="drawerBody"></div>
+    <div class="drawer__foot" id="drawerFoot"></div>
+  </div>
+</div>
+
+<!-- ===================== CONFIRM MODAL ===================== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal__card">
+    <h3 id="modalTitle">Are you sure?</h3>
+    <div id="modalBody"></div>
+    <div class="modal__acts">
+      <button class="btn btn--ghost btn--sm" id="modalCancel">Cancel</button>
+      <button class="btn btn--primary btn--sm" id="modalOk">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/flats.js"></script>
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/media.js"></script>
+<script src="assets/js/enquiries.js"></script>
+<script src="assets/js/platform.js"></script>
+<script src="assets/js/admin-shell.js"></script>
+<script src="assets/js/admin-pages.js"></script>
+<script>
+  (function () {
+    var x = document.getElementById('drawerX');
+    if (x) x.addEventListener('click', function () { window.NitoAdmin.closeDrawer(); });
+    var d = document.getElementById('drawer');
+    if (d) d.addEventListener('click', function (e) {
+      if (e.target === this) window.NitoAdmin.closeDrawer();
+    });
+  })();
+</script>
+</body>
+</html>

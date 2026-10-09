@@ -1,0 +1,888 @@
+/* ==========================================================================
+   NITO SPORTS — Platform admin design system
+   --------------------------------------------------------------------------
+   Loaded by the admin/account pages only. Opens with its own :root block, so
+   every token it uses is defined here and cannot leak into the public site.
+
+   Visual language: dark navy console, blue accent sampled from the NITO
+   runner mark (#1b8ec4), dense table-first layout, light-on-dark text.
+   ========================================================================== */
+
+:root{
+  /* accent — from the logo artwork */
+  --blue:#1b8ec4;
+  --blue-600:#1579a8;
+  --blue-300:#4db8dd;
+  --blue-wash:rgba(27,142,196,.14);
+  --blue-glow:rgba(27,142,196,.22);
+  --blue-line:rgba(27,142,196,.42);
+
+  /* ink surfaces, deepest first */
+  --ink-900:#070d15;
+  --ink-850:#0b131e;
+  --ink-800:#0f1a27;
+  --ink-750:#142132;
+  --ink-700:#1a2b3f;
+  --ink-600:#22374e;
+
+  /* borders */
+  --line:#1c2c3f;
+  --line-2:#25384e;
+  --line-3:#31485f;
+
+  /* text */
+  --t1:#eef4fa;
+  --t2:#c8d5e3;
+  --t3:#8fa1b6;
+  --t4:#6b7d93;
+  --t5:#556a80;
+
+  /* status */
+  --ok:#34d399;
+  --ok-wash:rgba(52,211,153,.12);
+  --warn:#fbbf24;
+  --warn-wash:rgba(251,191,36,.12);
+  --err:#f87171;
+  --err-wash:rgba(248,113,113,.12);
+  --err-line:rgba(248,113,113,.42);
+  --gold:#f9b20a;
+
+  /* layout */
+  --side-w:250px;
+  --top-h:60px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
+  --s7:48px; --s8:64px; --s9:96px;
+  --r-xs:4px; --r-sm:6px; --r:8px; --r-lg:12px; --r-full:999px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.4,0,.2,1);
+  --t-fast:140ms; --t:220ms;
+  --font:'PT Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  --font-head:'Poppins','PT Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  background:var(--ink-900);color:var(--t2);
+  font-family:var(--font);font-size:14px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+/* Icons are inline SVGs with a 24x24 viewBox and NO width/height attributes.
+   With only max-width here, any icon dropped somewhere without its own scoped
+   size rule expanded to fill its container — the team "role matrix" rendered
+   four metre-tall tick marks. A default size makes that impossible; the scoped
+   rules below (.btn svg, .side__link svg, …) still override it. */
+img,svg{display:block;max-width:100%}
+svg{width:24px;height:24px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+input,select,textarea{font:inherit;color:inherit}
+ul,ol{margin:0;padding:0}
+li{list-style:none}
+table{border-collapse:collapse;width:100%}
+[hidden]{display:none !important}
+
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;
+}
+
+/* ==========================================================================
+   AUTH — sign in / sign up
+   ========================================================================== */
+
+.auth{
+  min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;
+  background:var(--ink-900);
+}
+.auth__aside{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;
+  padding:var(--s8) var(--s7);
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 0%,var(--blue-glow),transparent 62%),
+    linear-gradient(160deg,var(--ink-850) 0%,var(--ink-900) 70%);
+  border-right:1px solid var(--line);
+}
+.auth__aside::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:54px 54px;
+  mask-image:radial-gradient(ellipse 80% 70% at 30% 30%,#000,transparent 76%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 30% 30%,#000,transparent 76%);
+}
+.auth__aside > *{position:relative;z-index:2}
+.auth__logo{height:40px;width:auto}
+.auth__pitch{margin:auto 0;max-width:44ch}
+.auth__eyebrow{
+  font-family:var(--mono);font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--blue-300);display:block;margin-bottom:var(--s4);
+}
+.auth__pitch h2{
+  font-family:var(--font-head);font-size:clamp(1.6rem,2.6vw,2.3rem);line-height:1.2;
+  font-weight:700;color:var(--t1);margin:0 0 var(--s4);
+}
+.auth__pitch p{color:var(--t3);font-size:.9375rem;line-height:1.75;margin:0}
+.auth__points{display:flex;flex-direction:column;gap:var(--s3);margin-top:var(--s6)}
+.auth__point{display:flex;gap:var(--s3);align-items:flex-start;font-size:.875rem;color:var(--t2)}
+.auth__point svg{width:17px;height:17px;flex:none;color:var(--ok);margin-top:3px}
+.auth__foot{font-size:.75rem;color:var(--t4);line-height:1.7}
+
+.auth__main{display:grid;place-items:center;padding:var(--s6) var(--s5)}
+.auth__card{width:100%;max-width:400px}
+.auth__brand-m{display:none;height:34px;width:auto;margin:0 auto var(--s6)}
+.auth__tabs{
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;
+  background:var(--ink-800);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:var(--s5);
+}
+.auth__tab{
+  padding:9px;border-radius:var(--r-sm);font-family:var(--font-head);
+  font-size:.8125rem;font-weight:600;color:var(--t3);text-align:center;
+  transition:background var(--t) var(--ease-io),color var(--t) var(--ease-io);
+}
+.auth__tab:hover{color:var(--t1)}
+.auth__tab.is-on{background:var(--blue);color:#fff}
+.auth__title{font-family:var(--font-head);font-size:1.35rem;font-weight:700;color:var(--t1);margin:0 0 6px}
+.auth__sub{font-size:.875rem;color:var(--t3);margin:0 0 var(--s5)}
+.auth__form{display:flex;flex-direction:column;gap:var(--s4)}
+.auth__msg{
+  display:none;margin-top:var(--s4);padding:11px 14px;border-radius:var(--r-sm);
+  font-size:.8125rem;line-height:1.55;
+}
+.auth__msg.is-on{display:block}
+.auth__msg--err{background:var(--err-wash);border:1px solid rgba(248,113,113,.35);color:#fca5a5}
+.auth__msg--ok{background:var(--ok-wash);border:1px solid rgba(52,211,153,.35);color:#86efac}
+.auth__note{font-size:.75rem;color:var(--t4);line-height:1.7;margin-top:var(--s5);text-align:center}
+.auth__back{display:inline-flex;align-items:center;gap:7px;font-size:.8125rem;color:var(--t3);margin-top:var(--s5)}
+.auth__back:hover{color:var(--blue-300)}
+.auth__back svg{width:15px;height:15px}
+
+@media (max-width:900px){
+  .auth{grid-template-columns:1fr}
+  .auth__aside{display:none}
+  .auth__brand-m{display:block}
+}
+
+/* ==========================================================================
+   FORM CONTROLS
+   ========================================================================== */
+
+.field{display:flex;flex-direction:column;gap:7px}
+.field__lbl{
+  font-family:var(--font-head);font-size:.6875rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--t3);
+}
+.req{color:var(--err)}
+.hint{font-size:.75rem;color:var(--t4);font-weight:400;text-transform:none;letter-spacing:0}
+
+.input,.select,.textarea{
+  width:100%;padding:11px 13px;background:var(--ink-850);border:1px solid var(--line-2);
+  border-radius:var(--r-sm);font-size:.875rem;color:var(--t1);min-height:44px;
+  transition:border-color var(--t-fast) var(--ease-io),background var(--t-fast) var(--ease-io);
+}
+.textarea{min-height:110px;resize:vertical;line-height:1.6}
+.input::placeholder,.textarea::placeholder{color:var(--t5)}
+.input:hover,.select:hover,.textarea:hover{border-color:var(--line-3)}
+.input:focus,.select:focus,.textarea:focus{
+  outline:none;border-color:var(--blue);background:var(--ink-800);
+  box-shadow:0 0 0 3px var(--blue-wash);
+}
+.input[readonly]{background:var(--ink-800);color:var(--t3)}
+.select{
+  appearance:none;cursor:pointer;padding-right:36px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238fa1b6' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;
+}
+.select option{background:var(--ink-800);color:var(--t1)}
+.field.is-error .input,.field.is-error .select,.field.is-error .textarea{border-color:var(--err)}
+.field__err{font-size:.75rem;color:var(--err);display:none}
+.field.is-error .field__err{display:block}
+input[type="search"]::-webkit-search-cancel-button{filter:invert(.6)}
+input[type="file"]{display:none}
+
+/* checkbox */
+.check{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.875rem;color:var(--t2)}
+.check input{
+  width:17px;height:17px;flex:none;margin-top:2px;appearance:none;cursor:pointer;
+  border:1px solid var(--line-3);border-radius:var(--r-xs);background:var(--ink-850);
+  transition:background var(--t-fast) var(--ease-io),border-color var(--t-fast) var(--ease-io);
+}
+.check input:checked{background:var(--blue);border-color:var(--blue)}
+.check input:checked::after{
+  content:"";display:block;width:4px;height:8px;margin:2px auto 0;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 17px;border:1px solid transparent;border-radius:var(--r-sm);
+  font-family:var(--font-head);font-size:.8125rem;font-weight:600;line-height:1;
+  white-space:nowrap;cursor:pointer;
+  transition:background var(--t) var(--ease-io),color var(--t) var(--ease-io),
+             border-color var(--t) var(--ease-io);
+}
+.btn svg{width:15px;height:15px;flex:none}
+.btn--primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn--primary:hover{background:var(--blue-600);border-color:var(--blue-600)}
+.btn--ghost{background:transparent;color:var(--t2);border-color:var(--line-2)}
+.btn--ghost:hover{background:var(--ink-750);color:var(--t1);border-color:var(--line-3)}
+.btn--quiet{background:transparent;color:var(--t3);border-color:transparent}
+.btn--quiet:hover{background:var(--ink-800);color:var(--t1)}
+.btn--danger{background:var(--err);color:#2a0808;border-color:var(--err)}
+.btn--danger:hover{background:#e05555;border-color:#e05555}
+.btn--danger-ghost{background:transparent;color:var(--err);border-color:rgba(248,113,113,.4)}
+.btn--danger-ghost:hover{background:var(--err-wash)}
+.btn--block{display:flex;width:100%}
+.btn--sm{padding:7px 12px;font-size:.75rem}
+.btn--lg{padding:13px 22px;font-size:.875rem}
+.btn--icon{padding:8px;width:34px;height:34px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* ==========================================================================
+   SHELL — sidebar + topbar
+   ========================================================================== */
+
+.app{display:grid;grid-template-columns:var(--side-w) 1fr;min-height:100vh}
+
+/* Place the two real columns EXPLICITLY instead of relying on source order.
+   The shell's children are: .side__scrim, aside.side, main#view. With auto
+   placement the scrim claimed column 1 and the sidebar column 2, so main#view
+   wrapped into the NEXT ROW's first column — landing underneath the sidebar at
+   250px wide with the console body effectively invisible. That is the bug the
+   owner reported as "the frontend is not enterprise, I cannot add products":
+   the page rendered, the DOM was complete, and 1350px of screen stayed black.
+   Naming the columns makes the layout independent of DOM order, so adding a
+   child later cannot silently shift the main column again. */
+.side{grid-column:1;grid-row:1}
+.page{grid-column:2;grid-row:1}
+/* The scrim only exists as a grid item at <=900px (where it becomes a fixed
+   overlay). Outside that range it is display:none, so it is out of flow anyway
+   — but it is pinned here too so it can never claim column 1 again. */
+.side__scrim{grid-column:1;grid-row:1}
+
+.side{
+  background:var(--ink-850);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;
+}
+.side__top{
+  display:flex;align-items:center;gap:10px;
+  padding:var(--s4) var(--s5);border-bottom:1px solid var(--line);min-height:var(--top-h);
+}
+.side__logo{height:30px;width:auto;flex:none}
+.side__tag{
+  margin-left:auto;padding:3px 8px;border-radius:var(--r-xs);
+  background:var(--blue-wash);border:1px solid var(--blue-line);color:var(--blue-300);
+  font-family:var(--mono);font-size:.5625rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+}
+.side__nav{flex:1;overflow-y:auto;padding:var(--s4) var(--s3)}
+.side__grp{
+  font-family:var(--mono);font-size:.5625rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--t4);padding:var(--s4) var(--s3) 6px;
+}
+.side__link{
+  display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:var(--r-sm);
+  font-size:.8125rem;font-weight:500;color:var(--t2);margin-bottom:2px;
+  transition:background var(--t-fast) var(--ease-io),color var(--t-fast) var(--ease-io);
+}
+.side__link svg{width:17px;height:17px;flex:none;color:var(--t4)}
+.side__link:hover{background:var(--ink-800);color:var(--t1)}
+.side__link:hover svg{color:var(--t3)}
+.side__link.is-on{background:var(--blue-wash);color:var(--t1)}
+.side__link.is-on svg{color:var(--blue-300)}
+.side__link.is-on::before{
+  content:"";position:absolute;left:0;width:3px;height:20px;border-radius:0 3px 3px 0;background:var(--blue);
+}
+.side__link{position:relative}
+.side__badge{
+  margin-left:auto;padding:1px 7px;border-radius:var(--r-full);background:var(--blue);
+  color:#fff;font-size:.625rem;font-weight:700;font-family:var(--mono);
+}
+.side__badge--mute{background:var(--ink-700);color:var(--t3)}
+.side__foot{padding:var(--s4);border-top:1px solid var(--line)}
+.side__user{display:flex;align-items:center;gap:10px}
+.side__avatar{
+  width:34px;height:34px;border-radius:var(--r-full);flex:none;
+  background:linear-gradient(140deg,var(--blue) 0%,var(--blue-600) 100%);
+  display:grid;place-items:center;color:#fff;font-weight:700;font-size:.8125rem;
+  font-family:var(--font-head);
+}
+.side__meta{min-width:0;flex:1}
+.side__name{font-size:.8125rem;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side__role{font-size:.6875rem;color:var(--t4)}
+.side__out{color:var(--t4);padding:6px;border-radius:var(--r-xs)}
+.side__out:hover{color:var(--err);background:var(--err-wash)}
+.side__out svg{width:16px;height:16px}
+
+.main{min-width:0;display:flex;flex-direction:column}
+.top{
+  position:sticky;top:0;z-index:30;min-height:var(--top-h);
+  display:flex;align-items:center;gap:var(--s4);
+  padding:0 var(--s6);background:rgba(7,13,21,.9);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.top__burger{display:none;color:var(--t2);padding:6px}
+.top__burger svg{width:20px;height:20px}
+.top__title{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--t1)}
+.top__sub{font-size:.75rem;color:var(--t4)}
+.top__right{margin-left:auto;display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap}
+.page{padding:var(--s6);flex:1;min-width:0}
+
+/* store-mode banner — always tells the truth about where data lives */
+.mode{
+  display:flex;align-items:flex-start;gap:11px;
+  padding:12px 15px;border-radius:var(--r-sm);margin-bottom:var(--s5);
+  font-size:.8125rem;line-height:1.6;
+}
+.mode svg{width:16px;height:16px;flex:none;margin-top:2px}
+.mode--local{background:var(--warn-wash);border:1px solid rgba(251,191,36,.32);color:#fcd34d}
+.mode--cloud{background:var(--ok-wash);border:1px solid rgba(52,211,153,.3);color:#6ee7b7}
+.mode b{font-weight:700}
+
+/* ==========================================================================
+   CARDS / PANELS
+   ========================================================================== */
+
+.card{
+  background:var(--ink-800);border:1px solid var(--line);border-radius:var(--r);
+}
+.card__head{
+  display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap;
+  padding:var(--s4) var(--s5);border-bottom:1px solid var(--line);
+}
+.card__title{font-family:var(--font-head);font-size:.875rem;font-weight:700;color:var(--t1)}
+.card__sub{font-size:.75rem;color:var(--t4)}
+.card__acts{margin-left:auto;display:flex;gap:var(--s2);flex-wrap:wrap}
+.card__body{padding:var(--s5)}
+
+.stack{display:flex;flex-direction:column}
+.stack-3{gap:var(--s3)} .stack-4{gap:var(--s4)} .stack-5{gap:var(--s5)}
+
+.grid{display:grid;gap:var(--s4)}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* ==========================================================================
+   STATS
+   ========================================================================== */
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4);margin-bottom:var(--s5)}
+.stat{
+  background:var(--ink-800);border:1px solid var(--line);border-radius:var(--r);
+  padding:var(--s4) var(--s5);position:relative;overflow:hidden;
+}
+.stat::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);
+}
+.stat--ok::after{background:var(--ok)}
+.stat--warn::after{background:var(--warn)}
+.stat--gold::after{background:var(--gold)}
+.stat__lbl{
+  font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--t4);margin-bottom:6px;
+}
+.stat__n{font-family:var(--font-head);font-size:1.7rem;font-weight:700;color:var(--t1);line-height:1.15}
+.stat__n small{font-size:.8125rem;font-weight:600;color:var(--t3);margin-left:5px}
+.stat__d{font-size:.6875rem;color:var(--t4);margin-top:4px}
+
+/* ==========================================================================
+   TABLE
+   ========================================================================== */
+
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tbl{font-size:.8125rem;min-width:640px}
+.tbl th{
+  text-align:left;font-family:var(--font-head);font-size:.625rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--t4);
+  padding:11px var(--s4);border-bottom:1px solid var(--line);white-space:nowrap;
+  background:var(--ink-850);position:sticky;top:0;
+}
+.tbl th.is-sortable{cursor:pointer;user-select:none}
+.tbl th.is-sortable:hover{color:var(--t2)}
+.tbl td{
+  padding:12px var(--s4);border-bottom:1px solid var(--line);
+  color:var(--t2);vertical-align:middle;
+}
+.tbl tbody tr{transition:background var(--t-fast) var(--ease-io)}
+.tbl tbody tr:hover{background:var(--ink-750)}
+.tbl tbody tr:last-child td{border-bottom:0}
+.tbl .num{font-family:var(--mono);font-size:.75rem;color:var(--t3);white-space:nowrap}
+.tbl .strong{color:var(--t1);font-weight:600}
+.tbl .acts{text-align:right;white-space:nowrap}
+.tbl__thumb{
+  width:38px;height:38px;border:1px solid var(--line);border-radius:var(--r-xs);
+  background:var(--ink-850);display:grid;place-items:center;overflow:hidden;flex:none;
+}
+.tbl__thumb svg{width:74%;height:auto;color:var(--t2)}
+.tbl__name{display:flex;align-items:center;gap:var(--s3);min-width:0}
+/* Both halves of the cell are BLOCK. As bare inline spans they shared one line,
+   so the product name collided with its own description — "3/4 Training
+   PantsBelow-knee cut for lifting" was rendering as a single run-on line. */
+.tbl__name-t{
+  display:block;color:var(--t1);font-weight:600;line-height:1.35;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+/* min-width:0 on the wrapper lets this truncate instead of forcing the table
+   column wider than its track. */
+.tbl__name > span:last-child{min-width:0;display:block}
+.tbl__name-s{
+  display:block;font-size:.6875rem;color:var(--t4);line-height:1.45;margin-top:1px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:46ch;
+}
+
+.empty{
+  padding:var(--s9) var(--s5);text-align:center;color:var(--t4);font-size:.875rem;
+  display:flex;flex-direction:column;align-items:center;gap:var(--s3);
+}
+.empty svg{width:34px;height:34px;opacity:.45}
+.empty b{color:var(--t2);font-family:var(--font-head);font-size:.9375rem;display:block}
+
+/* ==========================================================================
+   BADGES / PILLS
+   ========================================================================== */
+
+.badge{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-full);
+  font-size:.6875rem;font-weight:600;line-height:1.5;white-space:nowrap;
+  background:var(--ink-700);color:var(--t2);border:1px solid var(--line-2);
+}
+.badge--ok{background:var(--ok-wash);color:#6ee7b7;border-color:rgba(52,211,153,.3)}
+.badge--warn{background:var(--warn-wash);color:#fcd34d;border-color:rgba(251,191,36,.3)}
+.badge--err{background:var(--err-wash);color:#fca5a5;border-color:rgba(248,113,113,.3)}
+.badge--blue{background:var(--blue-wash);color:var(--blue-300);border-color:var(--blue-line)}
+.badge--gold{background:rgba(249,178,10,.12);color:var(--gold);border-color:rgba(249,178,10,.32)}
+.badge--role{font-family:var(--font-head);letter-spacing:.04em;text-transform:uppercase;font-size:.625rem}
+
+/* ==========================================================================
+   TOOLBAR
+   ========================================================================== */
+
+.bar{
+  display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;
+  padding:var(--s3) var(--s4);background:var(--ink-850);
+  border:1px solid var(--line);border-radius:var(--r);margin-bottom:var(--s4);
+}
+.bar__search{position:relative;flex:1;min-width:200px}
+.bar__search svg{
+  position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;color:var(--t4);
+}
+.bar__search .input{padding-left:35px}
+.bar__spacer{margin-left:auto}
+
+/* ==========================================================================
+   SEGMENTED / TABS
+   ========================================================================== */
+
+.seg{display:inline-flex;gap:3px;padding:3px;background:var(--ink-850);border:1px solid var(--line);border-radius:var(--r-sm)}
+.seg a,.seg button{
+  padding:6px 12px;border-radius:var(--r-xs);font-size:.75rem;font-weight:600;color:var(--t3);
+  transition:background var(--t-fast) var(--ease-io),color var(--t-fast) var(--ease-io);
+}
+.seg a:hover,.seg button:hover{color:var(--t1)}
+.seg .is-on{background:var(--blue);color:#fff}
+
+/* ==========================================================================
+   DRAWER (product editor) + MODAL
+   ========================================================================== */
+
+.drawer{
+  position:fixed;inset:0;z-index:80;display:none;
+  background:rgba(3,7,12,.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+}
+.drawer.is-on{display:block}
+.drawer__panel{
+  position:absolute;top:0;right:0;bottom:0;width:min(560px,100%);
+  background:var(--ink-850);border-left:1px solid var(--line-2);
+  display:flex;flex-direction:column;
+  animation:slideIn 260ms var(--ease);
+}
+@keyframes slideIn{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}
+.drawer__head{
+  display:flex;align-items:center;gap:var(--s3);
+  padding:var(--s4) var(--s5);border-bottom:1px solid var(--line);flex:none;
+}
+.drawer__title{font-family:var(--font-head);font-size:.9375rem;font-weight:700;color:var(--t1)}
+.drawer__x{margin-left:auto;color:var(--t3);padding:6px;border-radius:var(--r-xs)}
+.drawer__x:hover{color:var(--t1);background:var(--ink-750)}
+.drawer__x svg{width:18px;height:18px}
+.drawer__body{flex:1;overflow-y:auto;padding:var(--s5);display:flex;flex-direction:column;gap:var(--s4)}
+.drawer__foot{
+  flex:none;display:flex;gap:var(--s2);padding:var(--s4) var(--s5);
+  border-top:1px solid var(--line);background:var(--ink-800);
+}
+
+.modal{
+  position:fixed;inset:0;z-index:90;display:none;place-items:center;padding:var(--s5);
+  background:rgba(3,7,12,.78);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+}
+.modal.is-on{display:grid}
+.modal__card{
+  width:100%;max-width:440px;background:var(--ink-800);
+  border:1px solid var(--line-2);border-radius:var(--r);padding:var(--s6);
+}
+.modal__card h3{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--t1);margin:0 0 var(--s3)}
+.modal__card p{font-size:.875rem;color:var(--t3);line-height:1.65;margin:0 0 var(--s5)}
+.modal__acts{display:flex;gap:var(--s3);justify-content:flex-end}
+
+/* ==========================================================================
+   TOAST
+   ========================================================================== */
+
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,150%);
+  z-index:100;display:flex;align-items:center;gap:11px;
+  padding:12px 18px;border-radius:var(--r-sm);max-width:min(440px,92vw);
+  background:var(--ink-700);border:1px solid var(--line-3);color:var(--t1);
+  font-size:.8125rem;font-weight:600;box-shadow:0 20px 50px -18px rgba(0,0,0,.9);
+  transition:transform 320ms var(--ease);
+}
+.toast.is-on{transform:translate(-50%,0)}
+.toast svg{width:16px;height:16px;flex:none}
+.toast--ok svg{color:var(--ok)}
+.toast--err svg{color:var(--err)}
+
+/* ==========================================================================
+   CHART (dependency-free bars)
+   ========================================================================== */
+
+.chart{display:flex;align-items:flex-end;gap:var(--s3);height:170px;padding-top:var(--s4)}
+.chart__col{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}
+.chart__bar{
+  width:100%;max-width:46px;border-radius:var(--r-xs) var(--r-xs) 0 0;
+  background:linear-gradient(180deg,var(--blue) 0%,var(--blue-600) 100%);
+  min-height:3px;transition:height 420ms var(--ease);
+}
+.chart__v{font-family:var(--mono);font-size:.6875rem;color:var(--t2);font-weight:700}
+.chart__k{font-size:.6875rem;color:var(--t4);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+
+.bars{display:flex;flex-direction:column;gap:var(--s4)}
+.bars__row{display:grid;grid-template-columns:1fr auto;gap:6px var(--s4);align-items:center}
+.bars__lbl{font-size:.8125rem;color:var(--t2)}
+.bars__val{font-family:var(--mono);font-size:.75rem;color:var(--t3)}
+.bars__track{grid-column:1/-1;height:7px;border-radius:var(--r-full);background:var(--ink-700);overflow:hidden}
+.bars__fill{height:100%;border-radius:var(--r-full);background:var(--blue)}
+
+/* ==========================================================================
+   DETAIL LIST (enquiry / customer view)
+   ========================================================================== */
+
+.dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:11px var(--s4);font-size:.8125rem}
+.dl dt{color:var(--t4);font-weight:600}
+.dl dd{margin:0;color:var(--t1);word-break:break-word}
+
+.timeline{display:flex;flex-direction:column;gap:var(--s4)}
+.tl{display:flex;gap:var(--s3);position:relative;padding-left:2px}
+.tl::before{
+  content:"";position:absolute;left:6px;top:18px;bottom:-16px;width:1px;background:var(--line);
+}
+.tl:last-child::before{display:none}
+.tl__dot{
+  width:13px;height:13px;border-radius:var(--r-full);flex:none;margin-top:3px;
+  background:var(--ink-700);border:2px solid var(--line-3);
+}
+.tl__dot--blue{background:var(--blue);border-color:var(--blue)}
+.tl__dot--ok{background:var(--ok);border-color:var(--ok)}
+.tl__b{min-width:0}
+.tl__t{font-size:.8125rem;color:var(--t1);font-weight:600}
+.tl__m{font-size:.6875rem;color:var(--t4)}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width:1180px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  /* One column now, so the desktop pinning must be undone — a leftover
+     grid-column:2 would place content in a column that no longer exists and
+     push the page sideways. The sidebar becomes a fixed off-canvas overlay. */
+  .side,.page,.side__scrim{grid-column:auto;grid-row:auto}
+  .side{
+    position:fixed;left:0;top:0;bottom:0;z-index:70;width:var(--side-w);
+    transform:translateX(-100%);transition:transform 240ms var(--ease);
+  }
+  .side.is-open{transform:none;box-shadow:0 0 60px rgba(0,0,0,.7)}
+  .side__scrim{
+    position:fixed;inset:0;z-index:65;background:rgba(3,7,12,.6);display:none;
+  }
+  .side__scrim.is-on{display:block}
+  .top__burger{display:block}
+  .page{padding:var(--s4)}
+  .top{padding:0 var(--s4)}
+  .grid-3,.grid-2{grid-template-columns:minmax(0,1fr)}
+}
+
+@media (max-width:620px){
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .grid-4{grid-template-columns:minmax(0,1fr)}
+  .top__right{gap:var(--s2)}
+  .top__right .btn span{display:none}
+  .top__right .btn--icon{width:34px;padding:8px}
+  .card__head{padding:var(--s3) var(--s4)}
+  .card__body{padding:var(--s4)}
+  .drawer__panel{width:100%}
+  .chart{height:140px}
+}
+
+/* ==========================================================================
+   VISUAL DEPTH PASS
+   --------------------------------------------------------------------------
+   The console worked but read flat: page and card were both --ink-800-ish, so
+   nothing lifted, the 3px stat rail was invisible against its own card, and
+   every surface had the same border. Nothing here changes layout or colour
+   semantics — it separates the planes so the eye can find the hierarchy.
+
+   Depth comes from THREE cheap cues, none of which is a shadow-heavy redesign:
+     1. a darker page than the cards (background / surface separation)
+     2. a 1px inner highlight on top of each surface (reads as a lit edge)
+     3. one coloured accent per element, used sparingly
+   ========================================================================== */
+
+:root{
+  /* A page plane that is genuinely darker than the card plane. */
+  --plane:#0a121d;
+  --surface:#111d2c;
+  --surface-2:#152436;
+  --lit:rgba(255,255,255,.045);
+  --lift-1:0 1px 2px rgba(0,0,0,.4);
+  --lift-2:0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+/* ---- planes ------------------------------------------------------------- */
+
+/* position:relative is REQUIRED — the accent wash below is absolutely
+   positioned against .page, and without a positioned ancestor it would anchor
+   to the viewport and smear across the whole screen. */
+.page{background:var(--plane);position:relative}
+
+/* A soft accent wash at the top of the content plane, so the header block and
+   the first row of cards sit on a subtly lit field rather than flat black.
+   Anchored to .page (already offset by the sidebar), so left:0 spans exactly
+   the content column. Radial + transparent means no hard edge to scroll past. */
+.page::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:340px;
+  background:radial-gradient(1100px 340px at 22% -40%,var(--blue-glow),transparent 68%);
+  pointer-events:none;z-index:0;
+}
+.page > *{position:relative;z-index:1}
+
+/* ---- surfaces ----------------------------------------------------------- */
+
+/* .card and .tbl-wrap are the only real surface classes in the console markup
+   (verified against admin-pages.js). */
+.card,.stat,.tbl-wrap{
+  background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);
+  border:1px solid var(--line-2);
+  box-shadow:var(--lift-1),inset 0 1px 0 var(--lit);
+}
+
+.card{border-radius:var(--r-lg)}
+.card__head{
+  background:linear-gradient(180deg,rgba(255,255,255,.03),transparent);
+  border-bottom:1px solid var(--line-2);
+}
+
+/* ---- stat cards: the accent has to actually read ------------------------ */
+
+.stat{
+  border-radius:var(--r-lg);
+  padding:var(--s5);
+  transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),border-color var(--t) var(--ease);
+}
+.stat::after{width:3px;background:var(--blue);box-shadow:0 0 14px var(--blue-glow)}
+.stat::before{
+  /* faint corner glow so the card has a light source, not just a stripe */
+  content:"";position:absolute;right:-30px;top:-40px;width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle,var(--blue-wash),transparent 70%);pointer-events:none;
+}
+.stat--ok::after{background:var(--ok);box-shadow:0 0 14px rgba(52,211,153,.35)}
+.stat--ok::before{background:radial-gradient(circle,var(--ok-wash),transparent 70%)}
+.stat--warn::after{background:var(--warn);box-shadow:0 0 14px rgba(251,191,36,.35)}
+.stat--warn::before{background:radial-gradient(circle,var(--warn-wash),transparent 70%)}
+.stat--gold::after{background:var(--gold);box-shadow:0 0 14px rgba(249,178,10,.35)}
+.stat--gold::before{background:radial-gradient(circle,rgba(249,178,10,.14),transparent 70%)}
+.stat__n{font-size:2rem;letter-spacing:-.02em}
+.stat__lbl{color:var(--t3)}
+
+/* Hover only where hover is real — avoids a sticky "hovered" card on touch. */
+@media (hover:hover){
+  .stat:hover{transform:translateY(-2px);box-shadow:var(--lift-2),inset 0 1px 0 var(--lit)}
+  tr:hover td{background:rgba(255,255,255,.022)}
+}
+
+/* ---- empty states: a proper focal point, not a faint circle ------------- */
+
+.empty{padding:var(--s8) var(--s5)}
+.empty svg{opacity:1;color:var(--blue);width:38px;height:38px;
+  filter:drop-shadow(0 0 14px var(--blue-glow))}
+.empty b{font-size:1rem;letter-spacing:-.01em}
+.empty span{color:var(--t4);font-size:.8125rem;max-width:44ch;line-height:1.6}
+
+/* ---- table chrome ------------------------------------------------------- */
+
+.tbl-wrap{border-radius:var(--r-lg)}
+/* NOT sticky. The page scrolls as a whole (the shell is one grid, not a set of
+   scroll panes), so a sticky th would pin to the viewport and fight the real
+   header bar. The gradient alone separates the header row. */
+thead th{
+  background:linear-gradient(180deg,rgba(255,255,255,.035),transparent);
+}
+tbody tr{transition:background var(--t-fast) var(--ease-io)}
+tbody td{border-top:1px solid var(--line)}
+
+/* ---- sidebar: give the masthead and the active item more presence ------- */
+
+.side{background:linear-gradient(180deg,var(--ink-850),var(--ink-900))}
+.side__link.is-on{
+  background:linear-gradient(90deg,var(--blue-wash),transparent 85%);
+  box-shadow:inset 2px 0 0 var(--blue);
+}
+
+/* ---- form focus: one consistent, visible ring --------------------------- */
+
+.input:focus,.select:focus,.textarea:focus{
+  border-color:var(--blue-line);
+  box-shadow:0 0 0 3px var(--blue-wash);
+  outline:none;
+}
+
+/* ---- buttons: lift the primary so it is the obvious action -------------- */
+
+.btn--primary{
+  background:linear-gradient(180deg,var(--blue-300),var(--blue));
+  box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 6px 16px -8px var(--blue-glow);
+}
+.btn--primary:hover{filter:brightness(1.07)}
+
+/* ==========================================================================
+   SPARSE-PAGE DENSITY
+   --------------------------------------------------------------------------
+   An empty Enquiries / Customers / Audit page was one small card floating in a
+   1350px-wide void — the single biggest reason the console read as "not cool".
+   Stretching the card would only make it a wide empty box, so instead a page
+   with little content is held to a comfortable measure and centred, while the
+   dense pages (dashboard, products) keep the full width they need.
+
+   Opt in per page via --content-max on #view, set by the page module. Default
+   stays full width, so nothing changes unless a page asks for it.
+   ========================================================================== */
+
+#view{--content-max:none}
+/* Cap only the CONTENT, not the whole panel: the store-mode banner is a
+   full-width notice and must stay the width of the page, or it wraps
+   mid-sentence against the narrower measure. So the cap applies to every child
+   EXCEPT the banner, and the block is centred inside the panel. */
+#view[style*="--content-max"] > :not(.mode){
+  max-width:var(--content-max);
+  margin-inline:auto;
+}
+
+/* The classic trap: a grid/flex child will not shrink below its content unless
+   min-width:0, so a single wide row can still push the column past the cap. */
+#view > *{min-width:0}
+
+/* Empty states sit in a card that would otherwise bottom out at its own
+   padding; give them a floor so the card looks composed rather than clipped. */
+.empty{min-height:230px;justify-content:center}
+
+/* ==========================================================================
+   Product image field (product editor drawer)
+   --------------------------------------------------------------------------
+   Optional feature: the tech flat above is already a complete product image,
+   so this must read as "you may add photos", never as an empty required slot.
+   ========================================================================== */
+
+.imgset{display:flex;flex-direction:column;gap:var(--s2)}
+
+.imgset__empty{
+  padding:var(--s4);
+  border:1px dashed var(--line-3);
+  border-radius:var(--r-md);
+  background:var(--ink-850);
+  color:var(--t4);
+  font-size:.8125rem;
+  line-height:1.5;
+}
+
+.imgset__item{
+  display:flex;align-items:center;gap:var(--s3);
+  padding:8px;
+  border:1px solid var(--line-2);
+  border-radius:var(--r-md);
+  background:var(--ink-800);
+  min-width:0;
+}
+.imgset__item.is-lead{border-color:var(--blue-line);background:linear-gradient(180deg,var(--blue-wash),transparent)}
+
+.imgset__thumb{
+  position:relative;flex:none;
+  width:56px;height:56px;
+  border-radius:var(--r-sm);
+  overflow:hidden;
+  background:var(--ink-900);
+  border:1px solid var(--line-3);
+  display:grid;place-items:center;
+}
+.imgset__thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.imgset__miss{font-size:.625rem;color:var(--t5);text-transform:uppercase;letter-spacing:.04em}
+
+.imgset__badge{
+  position:absolute;left:0;bottom:0;
+  background:var(--blue);color:#fff;
+  font-size:.5625rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:1px 5px;
+}
+
+.imgset__meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.imgset__name{
+  font-size:.8125rem;color:var(--t2);font-weight:600;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.imgset__size{font-size:.6875rem;color:var(--t4);font-variant-numeric:tabular-nums}
+
+.imgset__acts{display:flex;gap:2px;flex:none}
+.imgset__acts .ibtn{
+  width:28px;height:28px;display:grid;place-items:center;
+  border:1px solid transparent;border-radius:var(--r-sm);
+  background:transparent;color:var(--t3);cursor:pointer;
+  transition:background .15s,color .15s,border-color .15s;
+}
+@media (hover:hover){
+  .imgset__acts .ibtn:hover:not(:disabled){background:var(--ink-700);color:var(--t1);border-color:var(--line-3)}
+}
+.imgset__acts .ibtn:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.imgset__acts .ibtn:disabled{opacity:.3;cursor:default}
+@media (hover:hover){
+  .imgset__acts .ibtn--danger:hover:not(:disabled){background:var(--err-wash);color:var(--err);border-color:var(--err-line)}
+}
+
+.imgset__bar{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap}
+.imgset__pick{cursor:pointer}
+.imgset__cap{
+  font-size:.75rem;color:var(--t4);
+  font-variant-numeric:tabular-nums;
+  margin-left:auto;
+}
+.imgset__cap.is-mid{color:#e0a54a}
+.imgset__cap.is-high{color:var(--err)}
+
+/* The drawer is 2-up on wide screens; a 56px thumb + two lines of text is
+   tight there, so on narrow drawers the meta line wraps under the thumb. */
+@media (max-width:520px){
+  .imgset__item{flex-wrap:wrap}
+  .imgset__cap{margin-left:0;width:100%}
+}

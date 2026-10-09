@@ -1,0 +1,60 @@
+PAYMENT MARKS — PROVENANCE
+==========================
+Retrieved: 2026-10-09
+
+Every file here is the provider's OWN published logo artwork, downloaded
+unmodified. Nothing was redrawn, re-coloured, re-typeset or lifted from a
+screenshot. Same rule as assets/img/scci.png and assets/img/fbr.png.
+
+These are third-party trademarks. They are displayed only to indicate which
+transfer methods NITO SPORTS accepts ("nominative use"), and index.html carries
+a visible attribution line saying so. NITO SPORTS is not an agent of any of
+these providers — a buyer sends the transfer through the provider of their
+choice.
+
+If the owner would rather not carry third-party marks at all, delete the `logo`
+field for that entry in assets/js/catalog.js; the card falls back to showing the
+method name as text, which is exactly what a method with no brand mark does.
+
+-------------------------------------------------------------------------------
+FILE                  SOURCE URL
+-------------------------------------------------------------------------------
+western-union.svg     https://upload.wikimedia.org/wikipedia/commons/1/1c/Western_Union_current_logo.svg
+                      Wikimedia Commons: "Western Union current logo.svg".
+                      Current WU mark (yellow arrow + black wordmark).
+                      Trademark of The Western Union Company.
+
+moneygram.svg         https://upload.wikimedia.org/wikipedia/commons/5/50/MoneyGram_Logo.svg
+                      Wikimedia Commons: "MoneyGram Logo.svg".
+                      Red circular-arrow mark + black wordmark.
+                      Trademark of MoneyGram International, Inc.
+
+ria.png               https://upload.wikimedia.org/wikipedia/commons/1/1e/Ria_Main_Logo_Descriptor_Color_RGB.png
+                      Wikimedia Commons: "Ria Main Logo Descriptor Color RGB.png".
+                      756x254 PNG, colour version.
+                      Trademark of Ria Financial Services (Euronet Worldwide, Inc.).
+
+payoneer.svg          https://upload.wikimedia.org/wikipedia/commons/e/e7/Payoneer_logo.svg
+                      Wikimedia Commons: "Payoneer logo.svg".
+                      Colour gradient circle + black wordmark.
+                      Trademark of Payoneer Global Inc.
+
+remitly.svg           https://upload.wikimedia.org/wikipedia/en/5/50/Remitly_Logo.svg
+                      English Wikipedia (en/ namespace — a NON-FREE / fair-use
+                      file, unlike the four above which are on Commons).
+                      Navy handshake-shield mark + wordmark.
+                      Trademark of Remitly, Inc.
+-------------------------------------------------------------------------------
+
+NO FILE FOR "Bank Transfer".
+It is a generic method, not a brand, so there is no issuing body to take artwork
+from and no honest logo to show. Its card renders the method name as text
+instead. Do not add a drawn bank glyph or a made-up mark for it.
+
+LICENSING NOTE FOR THE OWNER
+----------------------------
+Logos are protected as trademarks independently of copyright, so a Commons
+("free") file is still a trademark. Using a provider's mark to say "we accept
+this method" is standard practice on exporter and e-commerce sites, and the
+attribution line in index.html keeps the relationship unambiguous. If any
+provider objects, remove that entry's `logo` field — the section keeps working.

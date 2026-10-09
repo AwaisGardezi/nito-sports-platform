@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------------------
+# NITO SPORTS — .gitignore
+#
+# The project itself has no dependencies and no build step, so this file is
+# short on purpose. Everything listed here is either a secret, personal data,
+# or throwaway test output.
+# ---------------------------------------------------------------------------
+
+# --- secrets & personal data -----------------------------------------------
+# tools/server.js creates this on its first run. It holds the scrypt hash of
+# the staff password AND every customer enquiry (names, e-mail addresses,
+# phone numbers). Committing it would publish the owner's credentials and his
+# customers' data, so it must never enter the repository.
+data/
+
+# --- throwaway test output --------------------------------------------------
+# Written by run-tests.sh when a suite fails, and by the screenshot helpers.
+tests/test-logs/
+
+# --- local tool metadata ----------------------------------------------------
+# Written by the desktop helper that launches the project. Machine-specific,
+# carries nothing the repository needs.
+*.genie
+
+# --- OS noise ---------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- dependencies -----------------------------------------------------------
+# Not used by the site. Listed so a stray `npm install` cannot be committed.
+node_modules/

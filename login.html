@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Staff sign in — NITO SPORTS</title>
+<meta name="description" content="Staff sign in to the NITO SPORTS console.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070d15">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/app.css?v=20261009">
+</head>
+<body>
+
+<h1 class="sr-only">Staff sign in to NITO SPORTS</h1>
+
+<div class="auth">
+
+  <!-- ============ BRAND SIDE ============ -->
+  <aside class="auth__aside">
+    <a href="index.html" aria-label="NITO SPORTS — home">
+      <img class="auth__logo" src="assets/img/nito-lockup-light.png" width="432" height="102" alt="NITO SPORTS">
+    </a>
+
+    <div class="auth__pitch">
+      <span class="auth__eyebrow">Manufacturer &amp; Exporter · Sialkot</span>
+      <h2>One console for your catalogue, your buyers and every enquiry.</h2>
+      <p>
+        NITO SPORTS builds custom sportswear to your artwork, your block and your brand —
+        and ships worldwide. This is where the work behind that gets managed.
+      </p>
+      <div class="auth__points">
+        <div class="auth__point">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span><b>Publish instantly.</b> With the platform running, a published product is live on the site — no export step.</span>
+        </div>
+        <div class="auth__point">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span><b>Never lose an enquiry.</b> Every quote request is recorded the moment it is sent, then delivered by WhatsApp — a blocked popup cannot lose it.</span>
+        </div>
+        <div class="auth__point">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span><b>Know who changed what.</b> Every edit is recorded against the person who made it.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="auth__foot">
+      Staff access only. This console holds one account, issued by the owner — there is
+      no sign-up here.
+    </p>
+  </aside>
+
+  <!-- ============ FORM SIDE ============ -->
+  <main class="auth__main">
+    <div class="auth__card">
+
+      <img class="auth__brand-m" src="assets/img/nito-lockup-light.png" width="432" height="102" alt="NITO SPORTS">
+
+      <h2 class="auth__title" id="authTitle">Staff sign in</h2>
+      <p class="auth__sub" id="authSub">Sign in to manage the catalogue and enquiries.</p>
+
+      <form class="auth__form" id="authForm" data-mode="signin" novalidate>
+        <div class="field" id="fNameWrap" hidden>
+          <label class="field__lbl" for="aName">Your name</label>
+          <input class="input" type="text" id="aName" autocomplete="name" placeholder="e.g. Awais Haider">
+        </div>
+
+        <div class="field" id="fEmailWrap">
+          <label class="field__lbl" for="aEmail">E-mail address <span class="req">*</span></label>
+          <input class="input" type="email" id="aEmail" autocomplete="email" placeholder="you@company.com" required>
+          <span class="field__err">Enter your e-mail address.</span>
+        </div>
+
+        <div class="field" id="fPassWrap">
+          <label class="field__lbl" for="aPass">Password <span class="req">*</span></label>
+          <input class="input" type="password" id="aPass" autocomplete="current-password" placeholder="Your password" required>
+          <span class="field__err">Enter your password.</span>
+        </div>
+
+        <div class="field" id="fPass2Wrap" hidden>
+          <label class="field__lbl" for="aPass2">Confirm password <span class="req">*</span></label>
+          <input class="input" type="password" id="aPass2" autocomplete="new-password" placeholder="At least 8 characters">
+          <span class="hint">Use 8 characters or more.</span>
+        </div>
+
+        <button class="btn btn--primary btn--lg btn--block" type="submit" id="authSubmit">Sign in</button>
+      </form>
+
+      <div class="auth__msg" id="authMsg" role="status" aria-live="polite"></div>
+
+      <p class="auth__note" id="authNote"></p>
+
+      <span class="auth__back" style="display:flex;justify-content:center">
+        <a class="auth__back" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to the website
+        </a>
+      </span>
+
+    </div>
+  </main>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/flats.js"></script>
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/media.js"></script>
+<script src="assets/js/platform.js"></script>
+<script src="assets/js/auth-page.js"></script>
+</body>
+</html>
